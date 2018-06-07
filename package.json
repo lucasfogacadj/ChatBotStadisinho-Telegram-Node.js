@@ -1,0 +1,20 @@
+{
+  "name": "stadinho",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3001"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.12.2",
+    "axios": "0.17.1",
+    "knex": "^0.14.6",
+    "moment": "2.20.1",
+    "mysql": "^2.15.0",
+    "telegraf": "3.17.3"
+  }
+}
