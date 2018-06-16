@@ -1,8 +1,8 @@
 const moment = require('moment')
 const axios = require('axios')
 
-const baseUrl = 'http://localhost:3001/trabalhos'
-const usuUrl = 'http://localhost:3001/usuarios'
+const baseUrl = 'http://127.0.0.1:8000/api/trabalhos'
+const usuUrl = 'http://127.0.0.1:8000/api/usuarios'
 
 
 const getListaUsuarios = async() =>{
@@ -13,6 +13,7 @@ const getListaUsuarios = async() =>{
 
 const getUsuarios = async id =>{
     const resposta = await axios.get(`${usuUrl}/${id}`)
+    console.log(resposta)
     return resposta.data
 }
 
@@ -48,6 +49,7 @@ const getTrabalhosConcluidas = async idDoUsuario =>{
 
 const addTrabalho = async (desc, idDoUsuario) => {
     const res = await axios.post(`${baseUrl}`, { titulo: desc, idUsuario: idDoUsuario, dataEntrega: null, dataConcluida: null, anotacoes: null })
+    console.log(res)
     return res.data
 }
 

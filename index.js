@@ -1,4 +1,4 @@
-const env = require('../ChatBot Stadinho/.env')
+const env = require('../ChatBotStadinho - cópia/.env')
 const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
@@ -11,18 +11,8 @@ const Scene = require('telegraf/scenes/base')
 const{finalDeSemana} = require('./diaServices')
 
 const{
-    getUsuarios,
-    getTrabalho,
-    getListaTrabalhos,
-    getTrabalhos,
-    getTrabalhosConcluidas,
-    getListaUsuarios,
-    addTrabalho,
-    addUsuario,
-    excluirTrabalho,
-    EntregarTrabalho,
-    atualizarDataTrabalho,
-    atualizarAnotacoesTrabalho
+    getUsuarios, getTrabalho, getListaTrabalhos, getTrabalhos, getTrabalhosConcluidas, getListaUsuarios,
+    addTrabalho, addUsuario, excluirTrabalho, EntregarTrabalho, atualizarDataTrabalho, atualizarAnotacoesTrabalho
 } = require('./dbServices')
 
 const bot = new Telegraf(env.token)
@@ -31,6 +21,8 @@ bot.start( async ctx  =>{
     const nome = ctx.update.message.from.first_name
     idUsuario = ctx.update.message.from.id
     nickname = ctx.update.message.from.username
+    //console.log(idUsuario)
+    //console.log(nickname)
     exibirUsuarioPorID(idUsuario, nome, nickname)
     await ctx.reply(`Olá, ${nome}!`)
     await ctx.replyWithPhoto('https://i.imgur.com/SyMCuVE.png')
@@ -41,22 +33,17 @@ bot.start( async ctx  =>{
 
 const exibirUsuarioPorID = async (idUsuario, nome, nickname) =>{
     try {
+        console.log("verificando...")
         const teste = await getUsuarios(idUsuario)
         if(teste.id == idUsuario){
             return console.log('Usuário encontrato no banco')
              }
         } catch (err) {
+            console.log('Usuario não encontrado, adicionando.')
             return addUsuario(idUsuario, nome, nickname)
             }
     }
 
-
-
-const exibirUsuarios = async ctx =>{
-    const lista = await getListaUsuarios()
-    const vai = lista
-    console.log(vai)
-}
 
 const formatarData = data =>
     data ? moment(data).format('DD/MM/YYYY') : ''
@@ -64,12 +51,11 @@ const formatarData = data =>
 const exibirTrabalho = async (ctx, trabalhoId, novaMsg = false, idUsuario) => {
     const trabalho = await getTrabalho(trabalhoId)
     const entrega = trabalho.dataConcluida ?
-        `\n<b>Entregar em:</b> ${formatarData(trabalho.dataConcluida)}` : ''
+        `\n<b>Entrege em:</b> ${formatarData(trabalho.dataConcluida)}` : ''
     const msg = `
         <b>${trabalho.titulo}</b>
         <b>Data de Entrega do trabalho:</b> ${formatarData(trabalho.dataEntrega)}${entrega}
-        <b>Anotações:</b>\n${trabalho.anotacoes || ''}
-    `
+        <b>Anotações:</b>\n${trabalho.anotacoes || ''}`
 
     if (novaMsg) {
         ctx.reply(msg, botoesTrabalhos(trabalhoId))
@@ -88,10 +74,10 @@ const botoesListaTrabalho = trabalhos => {
 }
 
 const botoesTrabalhos = idTrabalho => Extra.HTML().markup(Markup.inlineKeyboard([
-    Markup.callbackButton('✔️', `concluir ${idTrabalho}`),
-    Markup.callbackButton('📅', `setData ${idTrabalho}`),
-    Markup.callbackButton('💬', `addNota ${idTrabalho}`),
-    Markup.callbackButton('✖️', `excluir ${idTrabalho}`),
+    Markup.callbackButton('✅', `concluir ${idTrabalho}`),
+    Markup.callbackButton('📆', `setData ${idTrabalho}`),
+    Markup.callbackButton('📝', `addNota ${idTrabalho}`),
+    Markup.callbackButton('❌', `excluir ${idTrabalho}`),
 ], { columns: 4 }))
 
 bot.hears([/^Trabalhos pra fazer$/i,/ˆtrabalho pra hoje$/,
@@ -113,7 +99,7 @@ bot.hears([/amanha/i, /tem alguma coisa para amanhã/i,
             /tem algum trabalho para amanhã/i, /tem alguma tarefa para amanhã/i,
             /preciso entregar algum trabalho para amanhã/i, /tem algo pra amanhã/i,
             /mostrar trabalhos que devem ser entregues amanhã/i, /Mostrar trabalhos para entregar amanhã/i], async ctx => {
-    
+
     idUsuario = ctx.update.message.from.id
     const trabalhos = await getListaTrabalhos(moment().add({ day: 1 }), idUsuario)
     if(!trabalhos.length == 0 || trabalhos == null ){
@@ -139,7 +125,7 @@ bot.hears([ /tem alguma coisa para essa semana/i, /^trabalho pra essa semana$/i,
 })
 
 bot.hears([/concluido/i, /^trabalhos entregues$/i,
-            /me mostre todos meus trabalhos concluidos/i, /ˆtrabalhos concluidos$/i, 
+            /me mostre todos meus trabalhos concluidos/i, /^trabalhos concluidos$/i, 
             /trabalhos feitos/i, /trabalhos que já fiz/i, /Mostrar trabalhos entregues/i,
             /mostrar trabalhos prontos/i,  /Quais os trabalhos concluidos/i], async ctx => {
     idUsuario = ctx.update.message.from.id
@@ -276,7 +262,7 @@ ScenaInserir.enter(ctx =>{
         idUsuario = ctx.update.message.from.id
         const trabalho = await addTrabalho(ctx.update.message.text, idUsuario)
         await ctx.reply('Agora você pode editar a data de entrega e colocar a descrição')
-        await exibirTrabalho(ctx, trabalho.id, true)
+        await exibirTrabalho(ctx, trabalho.id, truee)
         ctx.scene.leave()
     } catch (err) {
         console.log(err)

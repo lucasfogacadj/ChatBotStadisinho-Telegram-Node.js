@@ -1,14 +1,6 @@
 {
   "trabalhos": [
     {
-      "id": 1,
-      "idUsuario": 566917526,
-      "titulo": "Escrever o artigo! Pelo amor de Deus",
-      "dataEntrega": "2018-05-05",
-      "dataConcluida": null,
-      "anotacoes": "Usar metodologia Scrum\n---\nteste"
-    },
-    {
       "id": 2,
       "titulo": "Apresentar seminário de andamento pds",
       "dataEntrega": "2018-05-31",
@@ -55,12 +47,52 @@
       "id": 7
     },
     {
-      "titulo": "Jogar PUBG",
+      "titulo": "Entrega do artigo do pds",
       "idUsuario": 566917526,
-      "dataEntrega": "2018-06-06",
-      "dataConcluida": "2018-06-06",
-      "anotacoes": "Conseguir uma kill a 600 metros",
-      "id": 8
+      "dataEntrega": "2018-06-08",
+      "dataConcluida": null,
+      "anotacoes": "Revisar português",
+      "id": 10
+    },
+    {
+      "titulo": "Prova do Nicholas",
+      "idUsuario": 27095134,
+      "dataEntrega": null,
+      "dataConcluida": "2018-06-08",
+      "anotacoes": null,
+      "id": 11
+    },
+    {
+      "titulo": "Aaaa",
+      "idUsuario": 246936482,
+      "dataEntrega": null,
+      "dataConcluida": null,
+      "anotacoes": null,
+      "id": 12
+    },
+    {
+      "titulo": "Teste",
+      "idUsuario": 233486506,
+      "dataEntrega": "2018-06-15",
+      "dataConcluida": null,
+      "anotacoes": "Da hora",
+      "id": 13
+    },
+    {
+      "titulo": "Trabalho para teste",
+      "idUsuario": 566917526,
+      "dataEntrega": "2018-06-10",
+      "dataConcluida": null,
+      "anotacoes": "anotanção para teste",
+      "id": 14
+    },
+    {
+      "titulo": "Testando",
+      "idUsuario": 566917526,
+      "dataEntrega": null,
+      "dataConcluida": null,
+      "anotacoes": null,
+      "id": 15
     }
   ],
   "usuarios": [
@@ -77,6 +109,28 @@
     {
       "id": 463047200,
       "nome": "chatest"
+    },
+    {
+      "id": 233486506,
+      "nome": "Junior",
+      "username": "rodriguesjun1or"
+    },
+    {
+      "id": 27095134,
+      "nome": "Ramon"
+    },
+    {
+      "id": 389076474,
+      "nome": "guilherme"
+    },
+    {
+      "id": 554159282,
+      "nome": "Djian"
+    },
+    {
+      "id": 549271882,
+      "nome": "Юра",
+      "username": "Tpoter"
     }
   ]
 }
